@@ -12,6 +12,8 @@ public class LoginRegisterApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        DatabaseConnection dpconnection=new DatabaseConnection();
+        dpconnection.testConnection();
     }
 
     @Override

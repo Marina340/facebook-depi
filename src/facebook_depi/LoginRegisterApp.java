@@ -40,13 +40,21 @@ public class LoginRegisterApp extends Application {
             if (username.isEmpty() || password.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Please fill all fields!");
             } else {
-                // Add login logic here
-                showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome, " + username + "!");
+            	UserDAO userDAO = new UserDAO();
+//    
+                User user = userDAO.login(username, password);
+                
+                if (user != null) {
+                    showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome, " + username + "!");
+
+                } else {
+                    showAlert(Alert.AlertType.INFORMATION, "Login faild", "Please check your email and password");
+                }
             }
         });
 
         Button registerButton = new Button("Register");
-        registerButton.setOnAction(e -> showRegisterWindow());
+        registerButton.setOnAction(e ->{ showRegisterWindow();primaryStage.close();});
 
         VBox loginLayout = new VBox(10, loginTitle, usernameLabel, usernameField, passwordLabel, passwordField, loginButton, registerButton);
         loginLayout.setPadding(new Insets(20));
@@ -75,6 +83,8 @@ public class LoginRegisterApp extends Application {
 
         Label passwordLabel = new Label("Password:");
         PasswordField passwordField = new PasswordField();
+        Button loginButton = new Button("Login");
+        loginButton.setOnAction(e -> {showLoginScreen(registerStage);});
 
         Button registerButton = new Button("Register");
         registerButton.setOnAction(e -> {
@@ -84,13 +94,22 @@ public class LoginRegisterApp extends Application {
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Please fill all fields!");
             } else {
-                // Add registration logic here
-                showAlert(Alert.AlertType.INFORMATION, "Registration Success", "User registered successfully!");
+            	          UserDAO userDAO = new UserDAO();  
+                          User user = userDAO.Register(username,email, password);
+                          
+                          if (user != null) {
+                        	  showAlert(Alert.AlertType.INFORMATION, "Registration Success", "User registered successfully!");
+
+                          }
+//                          else {
+//                        	  showAlert(Alert.AlertType.INFORMATION, "register faild", "Somrthing go wrong");
+//                          } 
+                          
                 registerStage.close(); // Close the registration window
             }
         });
 
-        VBox registerLayout = new VBox(10, registerTitle, usernameLabel, usernameField, emailLabel, emailField, passwordLabel, passwordField, registerButton);
+        VBox registerLayout = new VBox(10, registerTitle, usernameLabel, usernameField, emailLabel, emailField, passwordLabel, passwordField, registerButton,loginButton);
         registerLayout.setPadding(new Insets(20));
         registerLayout.setAlignment(Pos.CENTER);
 

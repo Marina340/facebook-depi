@@ -9,7 +9,7 @@ public class DatabaseConnection {
     // Define the connection URL, username, and password
     private static final String URL = "jdbc:mysql://localhost:3306/facebookdebi";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "";
 
     // Method to establish a connection to the database
     public static Connection getConnection() throws SQLException {

@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import post.PostCreationGUI;
 
 public class LoginRegisterApp extends Application {
 
@@ -54,7 +55,12 @@ public class LoginRegisterApp extends Application {
         });
 
         Button registerButton = new Button("Register");
-        registerButton.setOnAction(e ->{ showRegisterWindow();primaryStage.close();});
+        registerButton.setOnAction(e ->{
+        	// Open the Post Creation GUI in a new window
+            Stage postStage = new Stage();
+            PostCreationGUI postCreationGUI = new PostCreationGUI();
+            postCreationGUI.display(postStage);	
+        /* showRegisterWindow();primaryStage.close();*/});
 
         VBox loginLayout = new VBox(10, loginTitle, usernameLabel, usernameField, passwordLabel, passwordField, loginButton, registerButton);
         loginLayout.setPadding(new Insets(20));

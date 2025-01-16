@@ -47,7 +47,9 @@ public class LoginRegisterApp extends Application {
                 
                 if (user != null) {
                     showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome, " + username + "!");
-
+                    Stage postStage = new Stage();
+                    PostCreationGUI postCreationGUI = new PostCreationGUI(postStage);
+                    System.out.println("Logged-in user: " + UserSession.getInstance().getUsername());
                 } else {
                     showAlert(Alert.AlertType.INFORMATION, "Login faild", "Please check your email and password");
                 }
@@ -55,12 +57,7 @@ public class LoginRegisterApp extends Application {
         });
 
         Button registerButton = new Button("Register");
-        registerButton.setOnAction(e ->{
-        	// Open the Post Creation GUI in a new window
-            Stage postStage = new Stage();
-            PostCreationGUI postCreationGUI = new PostCreationGUI();
-            postCreationGUI.display(postStage);	
-        /* showRegisterWindow();primaryStage.close();*/});
+        registerButton.setOnAction(e ->{ showRegisterWindow();primaryStage.close();});
 
         VBox loginLayout = new VBox(10, loginTitle, usernameLabel, usernameField, passwordLabel, passwordField, loginButton, registerButton);
         loginLayout.setPadding(new Insets(20));
@@ -105,11 +102,13 @@ public class LoginRegisterApp extends Application {
                           
                           if (user != null) {
                         	  showAlert(Alert.AlertType.INFORMATION, "Registration Success", "User registered successfully!");
-
+                        	    System.out.println("Logged-in user: " + UserSession.getInstance().getUsername());
+                        	    Stage postStage = new Stage();
+                                PostCreationGUI postCreationGUI = new PostCreationGUI(postStage);
                           }
-//                          else {
-//                        	  showAlert(Alert.AlertType.INFORMATION, "register faild", "Somrthing go wrong");
-//                          } 
+                          else {
+                        	  showAlert(Alert.AlertType.INFORMATION, "register faild", "Somrthing go wrong");
+                          } 
                           
                 registerStage.close(); // Close the registration window
             }

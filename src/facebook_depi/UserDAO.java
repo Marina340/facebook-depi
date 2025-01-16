@@ -12,6 +12,8 @@ public class UserDAO {
 	public User login(String userEmail, String password) {
 
         User user = null;
+        
+        System.out.println("In login user dao");
 
         String query = "SELECT * FROM user WHERE Email = ? AND Password = ?";
         String hashedPassword = PasswordUtil.hashPassword(password);
@@ -32,6 +34,10 @@ public class UserDAO {
                 user.setUsername(resultSet.getString("Name"));
                 user.setUserEmail(resultSet.getString("Email"));
                 user.setPassword(resultSet.getString("Password"));
+                
+             // Store the logged-in user's information in the session
+                UserSession session = UserSession.getInstance();
+                session.setUser(user.getUserId(), user.getUsername(), user.getUserEmail());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,6 +68,10 @@ public class UserDAO {
                         user.setUsername(userName);
                         user.setUserEmail(userEmail);
                         user.setPassword(hashedPassword); // Store the hashed password (optional)
+                        
+                     // Store the logged-in user's information in the session
+                        UserSession session = UserSession.getInstance();
+                        session.setUser(user.getUserId(), user.getUsername(), user.getUserEmail());
                     }
                 }
             }

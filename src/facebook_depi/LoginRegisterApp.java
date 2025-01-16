@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import post.PostCreationGUI;
+import profile.MainGUI;
+import profile.PProfileGUI;
 
 public class LoginRegisterApp extends Application {
 
@@ -47,8 +49,8 @@ public class LoginRegisterApp extends Application {
                 
                 if (user != null) {
                     showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome, " + username + "!");
-                    Stage postStage = new Stage();
-                    PostCreationGUI postCreationGUI = new PostCreationGUI(postStage);
+                    Stage mainStage = new Stage();
+                    MainGUI mainCreationGUI = new MainGUI(mainStage);
                     System.out.println("Logged-in user: " + UserSession.getInstance().getUsername());
                 } else {
                     showAlert(Alert.AlertType.INFORMATION, "Login faild", "Please check your email and password");

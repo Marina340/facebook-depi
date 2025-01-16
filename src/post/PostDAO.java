@@ -1,6 +1,5 @@
 package post;
 
-
 import facebook_depi.DatabaseConnection;
 import facebook_depi.UserSession;
 
@@ -19,6 +18,12 @@ public class PostDAO {
     public boolean createPost(String content, String imagePath) {
         if (!UserSession.getInstance().isLoggedIn()) {
             System.err.println("User is not logged in.");
+            return false;
+        }
+
+        // Ensure that either content or imagePath is provided
+        if ((content == null || content.trim().isEmpty()) && (imagePath == null || imagePath.trim().isEmpty())) {
+            System.err.println("Post cannot be empty. Provide either content or an image.");
             return false;
         }
 
@@ -87,6 +92,11 @@ public class PostDAO {
     public Post getPostById(int postId) {
         Post post = null;
 
+        if (!UserSession.getInstance().isLoggedIn()) {
+            System.err.println("User is not logged in.");
+            return null;
+        }
+
         String query = "SELECT * FROM Post WHERE PostID = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -118,6 +128,12 @@ public class PostDAO {
     public boolean updatePost(int postId, String content, String imagePath) {
         if (!UserSession.getInstance().isLoggedIn()) {
             System.err.println("User is not logged in.");
+            return false;
+        }
+
+        // Ensure that either content or imagePath is provided
+        if ((content == null || content.trim().isEmpty()) && (imagePath == null || imagePath.trim().isEmpty())) {
+            System.err.println("Post cannot be empty. Provide either content or an image.");
             return false;
         }
 

@@ -115,7 +115,7 @@ public class PProfileGUI extends Application {
          //   addProfileStage.close(); // Close the "Add Post" window
          //   loadPosts(); // Refresh the posts list
         } else {
-            showAlert("Error", "Failed to create post.");
+            showAlert("Error", "Failed to save profile.");
         }
         // Save the profile to the database (you can add this logic if needed)
         // For now, we focus on posts using PostDAO

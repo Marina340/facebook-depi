@@ -1,4 +1,4 @@
-package facebook_depi;
+package user;
 
 	import java.security.MessageDigest;
 	import java.security.NoSuchAlgorithmException;

@@ -1,5 +1,6 @@
-package facebook_depi;
+package user;
 
+import facebook_depi.DatabaseConnection;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -105,8 +106,8 @@ public class LoginRegisterApp extends Application {
                           if (user != null) {
                         	  showAlert(Alert.AlertType.INFORMATION, "Registration Success", "User registered successfully!");
                         	    System.out.println("Logged-in user: " + UserSession.getInstance().getUsername());
-                        	    Stage postStage = new Stage();
-                                PostCreationGUI postCreationGUI = new PostCreationGUI(postStage);
+                        	    Stage mainStage = new Stage();
+                                MainGUI mainCreationGUI = new MainGUI(mainStage);
                           }
                           else {
                         	  showAlert(Alert.AlertType.INFORMATION, "register faild", "Somrthing go wrong");

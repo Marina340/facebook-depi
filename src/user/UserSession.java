@@ -1,4 +1,4 @@
-package facebook_depi;
+package user;
 
 
 public class UserSession {

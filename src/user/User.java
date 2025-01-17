@@ -1,4 +1,4 @@
-package facebook_depi;
+package user;
 
 import java.util.Date;
 

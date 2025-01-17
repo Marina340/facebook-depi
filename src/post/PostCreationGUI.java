@@ -9,13 +9,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import profile.ProfileDAO;
+import user.UserSession;
 
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import facebook_depi.UserSession;
 
 public class PostCreationGUI {
 
@@ -61,6 +61,7 @@ public class PostCreationGUI {
         postsContainer.getChildren().clear(); // Clear existing posts
 
         PostDAO postDAO = new PostDAO();
+        ProfileDAO profileDAO = new ProfileDAO();
         List<Post> posts = postDAO.getPostsForCurrentUser();
 
         for (Post post : posts) {
@@ -73,8 +74,20 @@ public class PostCreationGUI {
             HBox userInfoBox = new HBox(10);
             userInfoBox.setAlignment(Pos.CENTER_LEFT);
 
+         // Fetch the profile picture path for the current user
+            String profilePicturePath = profileDAO.getProfilePicturePath(UserSession.getInstance().getUserId());
+
+            // Profile picture
+            ImageView profilePicture = new ImageView();
+            if (profilePicturePath != null && !profilePicturePath.isEmpty()) {
+                // Load the profile picture from the database
+                profilePicture.setImage(new Image(new File(profilePicturePath).toURI().toString()));
+            } else {
+                // Use a placeholder image if no profile picture is set
+                profilePicture.setImage(new Image("https://via.placeholder.com/40"));
+            }
             // Profile picture placeholder (you can replace this with an actual image)
-            ImageView profilePicture = new ImageView(new Image("https://via.placeholder.com/40")); // Placeholder image
+           // ImageView profilePicture = new ImageView(new Image("https://via.placeholder.com/40")); // Placeholder image
             profilePicture.setFitWidth(40);
             profilePicture.setFitHeight(40);
             profilePicture.setStyle("-fx-border-radius: 20;"); // Make the profile picture round

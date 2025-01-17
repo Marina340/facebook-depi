@@ -1,4 +1,4 @@
-package facebook_depi;
+package user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import facebook_depi.DatabaseConnection;
 import javafx.scene.control.Alert;
 
 public class UserDAO {

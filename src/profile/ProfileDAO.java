@@ -3,7 +3,7 @@ package profile;
 import java.sql.*;
 import java.time.LocalDateTime;
 import facebook_depi.DatabaseConnection;
-import facebook_depi.UserSession;
+import user.UserSession;
 
 public class ProfileDAO {
 
@@ -17,10 +17,10 @@ public class ProfileDAO {
         String query;
         if (profileID == null) {
             // Insert new profile
-            query = "INSERT INTO Profile (UserID, Bio, PrivacyLevel, ImagePath, CreatedAt, UpdatedAt) VALUES (?, ?, ?, ?, ?, ?)";
+            query = "INSERT INTO Profile (UserID, Bio, PrivacyLevel, ProfilePicture , CreatedAt, UpdatedAt) VALUES (?, ?, ?, ?, ?, ?)";
         } else {
             // Update existing profile
-            query = "UPDATE Profile SET Bio = ?, PrivacyLevel = ?, ImagePath = ?, UpdatedAt = ? WHERE ProfileID = ?";
+            query = "UPDATE Profile SET Bio = ?, PrivacyLevel = ?, ProfilePicture  = ?, UpdatedAt = ? WHERE ProfileID = ?";
         }
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -78,5 +78,24 @@ public class ProfileDAO {
             System.out.println("Connection failed!");
             e.printStackTrace();
         }
+    }
+    // Method to get the profile picture path for a user
+    public String getProfilePicturePath(int userId) {
+        String profilePicturePath = null;
+        String query = "SELECT ProfilePicture FROM Profile WHERE UserID = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                profilePicturePath = rs.getString("ProfilePicture");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return profilePicturePath;
     }
 }

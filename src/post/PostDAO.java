@@ -1,7 +1,7 @@
 package post;
 
 import facebook_depi.DatabaseConnection;
-import facebook_depi.UserSession;
+import user.UserSession;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -183,4 +183,5 @@ public class PostDAO {
             return false;
         }
     }
+
 }
